@@ -1,0 +1,695 @@
+/* =========================================================
+   文学杂志风主题（米色纸感 + 墨色文字 + 赭红点缀）
+   背景色：#f7f3ea
+   ========================================================= */
+
+:root {
+  --bg: #f7f3ea;
+  --text: #4a443b;
+  --text-h: #211d18;
+  --muted: #8a8272;
+  --border: #e0d9c8;
+  --code-bg: #efe9db;
+  --accent: #b0522d;
+  --accent-bg: rgba(176, 82, 45, 0.08);
+  --accent-border: rgba(176, 82, 45, 0.45);
+  --shadow: rgba(31, 28, 22, 0.08) 0 10px 30px -12px;
+
+  --serif: Georgia, 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 17px/1.9 var(--serif);
+  letter-spacing: 0.02em;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1916;
+    --text: #c9c2b2;
+    --text-h: #efe9db;
+    --muted: #8f8878;
+    --border: #35302a;
+    --code-bg: #242019;
+    --accent: #d98e63;
+    --accent-bg: rgba(217, 142, 99, 0.1);
+    --accent-border: rgba(217, 142, 99, 0.45);
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 30px -12px;
+  }
+} */
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+#root {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------
+   头部：衬线标题 + 字距拉开的导航，细底边
+   --------------------------------------------------------- */
+header {
+  max-width: 928px;
+  margin: 0 auto;
+  padding: 30px 24px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.site-avatar {
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.site-avatar:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.site-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 82%;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center; 
+  gap: 12px; /* 头像和文字之间的间距，你可以自己调 */
+}
+
+header nav {
+  display: flex;
+  gap: 30px;
+}
+
+header nav a {
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+header nav a:hover {
+  color: var(--text-h);
+}
+
+header nav a.active {
+  color: var(--text-h);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------
+   内容列：窄栏居中，贴近模板的阅读宽度
+   --------------------------------------------------------- */
+.page {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+  box-sizing: border-box;
+}
+
+.page h1 {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  color: var(--text-h);
+  margin: 48px 0 20px;
+}
+
+.page h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 32px 0 12px;
+}
+
+/* 首页欢迎语等正文 */
+.page p {
+  margin: 0 0 12px;
+}
+
+/* ---------------------------------------------------------
+   首页大图（hero）：预留给图片位
+   --------------------------------------------------------- */
+.hero {
+  margin: 40px 0 8px;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: sepia(0.12) saturate(0.9);
+  box-shadow: var(--shadow);
+}
+
+/* ---------------------------------------------------------
+   首页文章区：小标签 + 日期 + 大标题 + 摘要 + 继续阅读
+   --------------------------------------------------------- */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 56px 0 4px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.post-item {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-date {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.25em;
+}
+
+.post-item h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  margin: 12px 0;
+}
+
+.post-item h2 a {
+  color: var(--text-h);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.post-item h2 a:hover {
+  color: var(--accent);
+}
+
+.post-excerpt {
+  margin: 0 0 14px;
+  line-height: 2;
+}
+
+.read-more {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.read-more::after {
+  content: ' →';
+}
+
+.read-more:hover {
+  color: var(--text-h);
+}
+
+/* ---------------------------------------------------------
+   首页按钮区：文字链风格（模板里没有大按钮）
+   --------------------------------------------------------- */
+.actions {
+  display: flex;
+  gap: 36px;
+  margin: 32px 0 48px;
+}
+
+.actions a {
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.actions a::after {
+  content: ' →';
+}
+
+.actions a:hover {
+  color: var(--text-h);
+}
+
+/* ---------------------------------------------------------
+   文章列表页
+   --------------------------------------------------------- */
+.article-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.article-list li {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-list a {
+  font-family: var(--serif);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--text-h);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.article-list a:hover {
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------
+   文章详情页
+   --------------------------------------------------------- */
+.article-detail .meta {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  margin: 0 0 32px;
+}
+
+.article-detail .content {
+  line-height: 2.2;
+  white-space: pre-wrap;
+  margin-bottom: 40px;
+}
+
+.article-detail .read-more,
+.article-detail > a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.article-detail > a:hover {
+  color: var(--text-h);
+}
+
+/* ---------------------------------------------------------
+   代码块
+   --------------------------------------------------------- */
+code {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 3px 8px;
+  background: var(--code-bg);
+  border-radius: 3px;
+  color: var(--text-h);
+}
+
+/* ---------------------------------------------------------
+   分页（antd 主题定制：跟随本主题变量）
+   --------------------------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 64px;
+}
+
+/* 数字页码方块 */
+.pagination .ant-pagination-item {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text);
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.pagination .ant-pagination-item a {
+  color: inherit;
+}
+
+.pagination .ant-pagination-item:hover {
+  border-color: transparent;
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
+
+.pagination .ant-pagination-item:hover a {
+  color: var(--text-h);
+}
+
+/* 当前页高亮 */
+.pagination .ant-pagination-item-active {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pagination .ant-pagination-item-active a {
+  color: var(--accent);
+}
+
+.pagination .ant-pagination-item-active:hover,
+.pagination .ant-pagination-item-active:hover a {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+}
+
+/* 上/下页箭头 + 省略号 */
+.pagination .ant-pagination-prev .ant-pagination-item-link,
+.pagination .ant-pagination-next .ant-pagination-item-link,
+.pagination .ant-pagination-jump-prev .ant-pagination-item-link,
+.pagination .ant-pagination-jump-next .ant-pagination-item-link {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text);
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.pagination .ant-pagination-prev:not(.ant-pagination-disabled) .ant-pagination-item-link:hover,
+.pagination .ant-pagination-next:not(.ant-pagination-disabled) .ant-pagination-item-link:hover,
+.pagination .ant-pagination-jump-prev .ant-pagination-item-link:hover,
+.pagination .ant-pagination-jump-next .ant-pagination-item-link:hover {
+  background: var(--accent-bg);
+  color: var(--text-h);
+  border-color: transparent;
+}
+
+.pagination .ant-pagination-item-ellipsis {
+  color: var(--text);
+}
+
+.pagination .ant-pagination-disabled .ant-pagination-item-link {
+  color: var(--text);
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* “跳至 __ 页” */
+.pagination .ant-pagination-options-quick-jumper {
+  color: var(--text);
+}
+
+.pagination .ant-pagination-options-quick-jumper input {
+  height: 36px;
+  width: 56px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  box-shadow: none;
+  transition: border-color 0.15s;
+}
+
+.pagination .ant-pagination-options-quick-jumper input:hover,
+.pagination .ant-pagination-options-quick-jumper input:focus {
+  border-color: var(--accent-border);
+  box-shadow: none;
+}
+
+/* （备用）showSizeChanger 打开时的选择框 */
+.pagination .ant-pagination-options .ant-select-selector {
+  background: var(--bg);
+  border-color: var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+}
+
+/* ---------------------------------------------------------
+   页脚
+   --------------------------------------------------------- */
+footer {
+  margin-top: auto;
+  padding: 36px 24px 44px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------------------------------------------------
+   响应式
+   --------------------------------------------------------- */
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .page h1 {
+    font-size: 30px;
+    margin: 32px 0 16px;
+  }
+
+  .post-item h2 {
+    font-size: 24px;
+  }
+
+  .hero-img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ===== 登录/注册表单 ===== */
+.auth-form {
+  max-width: 420px;
+  margin: 64px auto 0;
+}
+
+.auth-form h1 {
+  font-size: 32px;
+  margin: 0 0 28px;
+}
+
+.auth-field {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-field label {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.auth-field input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 42px;
+  padding: 0 12px;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color 0.15s;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--accent-border);
+}
+
+.auth-error {
+  color: var(--accent);
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.auth-submit {
+  width: 100%;
+  height: 44px;
+  margin-top: 8px;
+  font-family: var(--serif);
+  font-size: 16px;
+  letter-spacing: 0.3em;
+  color: var(--bg);
+  background: var(--text-h);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.auth-submit:hover {
+  opacity: 0.85;
+}
+
+.auth-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.auth-switch button {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.auth-switch button:hover {
+  color: var(--text-h);
+}
+
+.login-user {
+  font-size: 15px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ===== 用户菜单（头像下拉） ===== */
+.user-menu {
+  position: relative;
+}
+
+.user-avatar-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.user-avatar-btn:hover {
+  border-color: var(--accent);
+}
+
+.user-avatar-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 140px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+.user-dropdown-item {
+  width: 100%;
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--text-h);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.user-dropdown-item:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* ===== 个人中心页 ===== */
+.profile-card {
+  max-width: 480px;
+  margin: 64px auto 0;
+  text-align: center;
+}
+
+.profile-card h1 {
+  font-size: 32px;
+  margin: 20px 0 8px;
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.profile-email {
+  color: var(--muted);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+}
